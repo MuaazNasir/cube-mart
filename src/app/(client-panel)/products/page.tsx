@@ -19,7 +19,7 @@ const Page = () => {
   const [choice, setChoice] = useState<any>('all')
   const [error, setError] = useState<any>(null);
   const [filteredProducts, setFilteredProducts] = useState<any>();
-  
+
 
   const varitiesOptions = [
     {
@@ -85,7 +85,7 @@ const Page = () => {
     };
 
     fetchProduct();
-  }, [slug]);
+  }, [choice, allProducts, recommended, topRated, mostSaled, slug]);
 
 
   const handleClick = (e: any) => {

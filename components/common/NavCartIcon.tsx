@@ -10,7 +10,7 @@ const NavCartIcon = () => {
     // console.log(selector)
 
     return (
-        <Link href={'/cart'} className="rounded-full overflow-hidden relative">
+        <Link href={'/cart'} className="rounded-full overflow-hidden relative" passHref>
             <Button variant="text" className="rounded-full">
                 <CartIcon size={30} ></CartIcon>
                 <span className='absolute top-0 right-0 bg-red-500 rounded-full h-[20px] w-[20px] text-center'>

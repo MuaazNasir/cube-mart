@@ -21,16 +21,16 @@ const Navbar = () => {
 
   useEffect(() => {
     const localData = JSON.stringify(localStorage.getItem('cart'));
-    if(localData !== "") {
+    if (localData !== "") {
       let parsed = JSON.parse(localData);
-      if(parsed) {
+      if (parsed) {
         parsed = parsed.split(',')
         dispatch(
           addProduct(parsed)
-          )
+        )
       }
     }
-  }, [])
+  }, [dispatch])
 
   return (
     <>
@@ -57,14 +57,14 @@ const Navbar = () => {
                 <Link href={'/categories'} onClick={() => { setNavOpen(false) }}>Categories</Link>
               </li>
               <li className=" block md:hidden">
-                <Link href={'/'} className="rounded-full overflow-hidden" onClick={() => { setNavOpen(false) }}>
+                <Link href={'/'} passHref className="rounded-full overflow-hidden" onClick={() => { setNavOpen(false) }}>
                   <Button variant="text" className="rounded-full">
                     <CartIcon size={30} color="white"></CartIcon>
                   </Button>
                 </Link>
               </li>
               <li className=" block md:hidden">
-                <Link href={'/'} >
+                <Link href={'/'} passHref>
                   <Button variant="outlined" onClick={() => { setNavOpen(false) }} className="border-black text-black">Login</Button>
                 </Link>
               </li>
@@ -76,7 +76,7 @@ const Navbar = () => {
 
             <ul className="hidden flex-row items-center justify-center space-x-4 md:flex">
               <li>
-                <Link href={'/'} >
+                <Link href={'/'} passHref>
                   <Button variant="outlined" onClick={() => { setNavOpen(false) }} className="border-black text-black">Login</Button>
                 </Link>
               </li>

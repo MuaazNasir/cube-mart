@@ -15,7 +15,7 @@ type categoryProducts = {
     products: any[]
 }[]
 
-const page = () => {
+const Categories = () => {
 
 
     const [categories, setCategories] = useState<any[]>();
@@ -104,4 +104,4 @@ const page = () => {
 }
 
 
-export default page
+export default Categories;

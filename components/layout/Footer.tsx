@@ -11,7 +11,7 @@ const Footer = () => {
                 <div className="container px-5 py-24 mx-auto bg-gray-100 rounded-t-xl shadow-lg shadow-gray-400">
                     <div className="flex flex-wrap md:text-left text-center order-first">
                         {
-                            n.map((elem,i) => {
+                            n.map((elem, i) => {
                                 return (
                                     <>
                                         <div className="lg:w-1/4 md:w-1/2 w-full px-4" key={i}>
@@ -43,7 +43,7 @@ const Footer = () => {
                 <div className="bg-gray-100 ">
                     <div className="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
                         <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-                            <Image src={CubeIcon} alt='cube' height={50} width={50}/>
+                            <Image src={CubeIcon} alt='cube' height={50} width={50} />
                             <span className="ml-3 text-xl">Cube-Mart</span>
                         </a>
                         <p className="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">
@@ -52,6 +52,7 @@ const Footer = () => {
                                 href="https://muaaz-nasir-portfolio.vercel.app"
                                 className="text-gray-600 ml-1"
                                 target="_blank"
+                                rel="noreferrer"
                             >
                                 MuaazNasir
                             </a>

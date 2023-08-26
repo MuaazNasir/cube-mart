@@ -11,7 +11,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { deleteProduct } from '@/redux/slices/useReducer';
 import LoadError from '../../../../components/loadings/LoadError';
 
-const page = () => {
+const Cart = () => {
 
     const selector = useSelector((state: any) => state.CartProducts);
     const dispatch = useDispatch();
@@ -114,7 +114,7 @@ const CartProductCard = ({ name, image, price, setTotalPrice, setTotalQuantity, 
     useEffect(() => {
         setTotalPrice((prev: number) => prev + price)
         setTotalQuantity((prev: number) => prev + 1)
-    }, [])
+    }, [price, setTotalPrice, setTotalQuantity])
 
     const deleteCartProduct = (_id: string) => {
         dispatch(
@@ -157,4 +157,4 @@ const CartProductCard = ({ name, image, price, setTotalPrice, setTotalQuantity, 
         </div >
     )
 }
-export default page;
+export default Cart;

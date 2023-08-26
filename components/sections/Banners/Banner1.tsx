@@ -19,7 +19,7 @@ const Banner1 = () => {
                     <div className="text-xl font-semibold tracking-[0.1rem] capitalize md:font-2xl text-gray-200 font-mono mt-14 mb-5 z-[1]">
                         here you can get the best gadgets .
                     </div>
-                    <Link href={'/products'}>
+                    <Link href={'/products'} passHref>
                     <Button variant="outlined" className="border-2 border-blue-500 hover:border-2 hover:scale-105 transition-all z-[1] text-white font-bold tracking-wide">Shop Now !</Button>
                     </Link>
                 </div>

@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux/es/exports"
 import { addProduct } from "@/redux/slices/useReducer"
 import { useEffect, useState } from "react"
 import Alert from "./Alert"
-import addToCart from "@/utils/addToCart"
 
 
 const ProductCard = ({ name, price, rating, image, _id, slug }: any) => {
@@ -40,11 +39,11 @@ const ProductCard = ({ name, price, rating, image, _id, slug }: any) => {
             <div className="w-full max-w-sm bg-gray-200 border border-gray-200 rounded-lg m-5 transition-all hover:shadow-gray-400 shadow-md">
                 <Alert message='product added to cart' duration={5} showAlert={showAlert} setShowAlert={setShowAlert} />
 
-                <Link href={`/products/${slug.current}`} >
+                <Link href={`/products/${slug.current}`} passHref>
                     <Image className="p-8 rounded-t-lg mx-auto hover:scale-105 transition-all" src={urlFor(image).size(250, 250).url()} height={250} width={250} alt="product image" />
                 </Link>
                 <div className="px-5 pb-5">
-                    <Link href={`/products/${slug.current}`}>
+                    <Link href={`/products/${slug.current}`} passHref>
                         <h5 className="text-xl font-semibold tracking-tight text-gray-900 capitalize">{name}</h5>
                     </Link>
                     <div className="flex items-center mt-2.5 mb-5 cursor-default">
