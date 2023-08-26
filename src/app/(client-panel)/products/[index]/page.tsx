@@ -163,11 +163,5 @@ const Product = ({ props }: any) => {
   );
 };
 
-export async function GetServerSideProps(context: any) {
-  return {
-    props: { name: 'muaaz' }
-  }
-}
-
 
 export default Product;
