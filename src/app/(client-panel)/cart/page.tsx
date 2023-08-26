@@ -69,9 +69,9 @@ const Cart = () => {
 
             <div className="">
                 <div className="text-5xl font-sans font-extrabold my-4 text-center">Your Cart</div>
-                <div className="flex flex-row justify-between items-center w-[80%] mx-auto">
+                <div className="flex flex-row justify-between items-center w-[80%] mx-auto flex-wrap gap-5">
                     {/* products */}
-                    <div className="w-[50%] space-y-5">
+                    <div className="min-w-min space-y-5 ">
                         {
                             cartProducts.map((product, i) => {
                                 const { name, price, _id, image }: any = product;
@@ -123,7 +123,7 @@ const CartProductCard = ({ name, image, price, setTotalPrice, setTotalQuantity, 
     }
 
     return (
-        <div className="flex flex-row items-center justify-around bg-gray-50 border-gray-800 border-2 rounded-md relative ">
+        <div className="flex flex-row items-center justify-around bg-gray-50 border-gray-800 border-2 rounded-md relative p-3 flex-wrap">
             <Image src={urlFor(image).size(200, 200).url()} width={200} height={200} alt=''></Image>
             <div className="">
                 <div className="text-xl font-sans font-bold capitalize">{name}</div>

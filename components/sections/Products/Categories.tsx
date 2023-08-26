@@ -69,7 +69,7 @@ const CategoryBox = ({ imgUrl, text, bgClr, hvrClr }: any) => {
     const router = useRouter();
     return (
         <>
-            <div className={`${bgClr} rounded-xl p-2 w-full sm:w-[33vw] lg:w-[20rem] h-[8rem] group relative overflow-hidden my-3 md:mx-3 lg:mx-0lg:m-5 md:basis-[45%] lg:basis-[45%]`} onClick={()=>router.push(`/categories`)}>
+            <div className={`${bgClr} rounded-xl p-2 w-full sm:w-full md:w-full lg:w-[20rem] h-[8rem] group relative overflow-hidden my-3 md:mx-3 lg:mx-0lg:m-5 md:basis-[45%] lg:basis-[45%]`} onClick={()=>router.push(`/categories`)}>
 
                 <Image src={imgUrl} alt="" height={100} width={100}></Image>
                 <div className={`text-lg text-white rotate-[-90deg] absolute top-[50%] right-[0px] -translate-y-1/2 group-hover:rotate-[0deg] group-hover:left-1/2 group-hover:-translate-x-1/2 transition-all group-hover:text-white group-hover:text-xl z-[1] font-mono font-bold`}>

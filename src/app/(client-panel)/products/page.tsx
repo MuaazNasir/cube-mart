@@ -121,14 +121,14 @@ const Page = () => {
       <div className="space-y-8">
         <div className="text-5xl text-gray-950 font-extrabold font-sans text-center my-4">Products</div>
 
-        <div className="flex flex-row w-[50%] items-center justify-around">
+        <div className="flex flex-row w-full justify-start flex-wrap items-center ">
 
           {
             varitiesOptions.map((elem, i) => {
               const { name, title } = elem;
               return (
                 <>
-                  <Button className={`${choice == name ? "bg-gray-800 text-gray-100" : "bg-gray-100 text-black"} text-lg font-sans capitalize font-extrabold hover:bg-gray-700 hover:text-white transition-all duration-300 origin-center`} variant='outlined' name={name} onClick={handleClick}>{title}</Button>
+                  <Button className={`${choice == name ? "bg-gray-800 text-gray-100" : "bg-gray-100 text-black"} text-lg font-sans capitalize font-extrabold hover:bg-gray-700 hover:text-white transition-all duration-300 origin-center m-1`} variant='outlined' name={name} onClick={handleClick}>{title}</Button>
                 </>
               )
             })

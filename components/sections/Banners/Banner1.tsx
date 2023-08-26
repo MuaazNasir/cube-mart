@@ -10,13 +10,13 @@ const Banner1 = () => {
             <div className="bg-darkestBlue p-5 rounded-2xl shadow-lg shadow-blue-400 h-96 relative my-5">
 
                 <div className="flex flex-col justify-center items-center">
-                    <div className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-gray-400 tracking-widest my-7">
+                    <div className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-gray-400 tracking-widest my-7 text-center z-[1]">
                         Buy The Best From
                     </div>
-                    <div className="text-6xl font-[800] tracking-[0.09rem] text-gray-500 my-4 z-[1] ">
+                    <div className="text-4xl font-[800] tracking-[0.09rem] text-gray-500 my-4 z-[1] ">
                         Cube-Mart
                     </div>
-                    <div className="text-xl font-semibold tracking-[0.1rem] capitalize md:font-2xl text-gray-200 font-mono mt-14 mb-5 z-[1]">
+                    <div className="text-xl font-semibold tracking-[0.1rem] capitalize md:font-2xl text-gray-200 font-mono sm:mt-14 mb-5 z-[1] text-center">
                         here you can get the best gadgets .
                     </div>
                     <Link href={'/products'} passHref>
