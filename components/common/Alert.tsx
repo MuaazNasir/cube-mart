@@ -31,7 +31,7 @@ const Alert = ({ message, duration, showAlert, setShowAlert }: Props) => {
 
     return (
         showAlert && (
-            <div className="fixed w-[30rem] flex items-end justify-start !overflow-hidden left-5 bottom-5 m-0 p-0 z-50">
+            <div className="fixed w-[30rem] items-end justify-start !overflow-hidden left-5 bottom-5 m-0 p-0 z-50 hidden sm:flex">
                 <div className="bg-gray-900 text-white p-4 rounded-lg shadow-lg max-w-md w-full bg-opacity-80 backdrop-blur-md ">
                     <div className="mb-2 capitalize text-center font-sans text-lg font-semibold">{message}</div>
                     <div className="flex flex-row items-center justify-between">
