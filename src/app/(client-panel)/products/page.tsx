@@ -11,7 +11,7 @@ import CartIcon from "../../../../public/icons/Cart";
 import ProductCard from '../../../../components/common/ProductCard';
 
 const Page = () => {
-  const slug = usePathname()?.split('/').pop();
+
   const [allProducts, setAllProducts] = useState<any>()
   const [recommended, setRecommended] = useState<any[]>([]);
   const [topRated, setTopRated] = useState<any[]>([]);
@@ -85,7 +85,7 @@ const Page = () => {
     };
 
     fetchProduct();
-  }, [choice, allProducts, recommended, topRated, mostSaled, slug]);
+  }, []);
 
 
   const handleClick = (e: any) => {
