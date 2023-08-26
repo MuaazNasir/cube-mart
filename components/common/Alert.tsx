@@ -23,9 +23,9 @@ const Alert = ({ message, duration, showAlert, setShowAlert }: Props) => {
         } else if (timeLeft === 0) {
             setShowAlert(false);
         }
-    }, [showAlert, timeLeft,setShowAlert]);
+    }, [showAlert, timeLeft, setShowAlert]);
 
-    const handleClose = () => {
+    const handleClose: any = () => {
         setShowAlert(false);
     };
 
