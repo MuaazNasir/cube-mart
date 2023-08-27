@@ -5,13 +5,13 @@ import { urlFor } from "../../sanity/utils"
 import { useDispatch, useSelector } from "react-redux/es/exports"
 import { addProduct } from "@/redux/slices/useReducer"
 import { useEffect, useState } from "react"
-import Alert from "./Alert"
+import toast, { Toaster } from 'react-hot-toast'
 
 
 const ProductCard = ({ name, price, rating, image, _id, slug }: any) => {
 
 
-    const [showAlert, setShowAlert] = useState(false);
+    const notify = () => toast('Product Added To Cart', { duration: 3000 })
     const dispatch = useDispatch();
     const selector: string | string[] = useSelector((state: any) => state.CartProducts);
 
@@ -27,7 +27,8 @@ const ProductCard = ({ name, price, rating, image, _id, slug }: any) => {
         dispatch(
             addProduct([`"${_id}"`])
         );
-        setShowAlert(true)
+        // setShowAlert(true)
+        notify()
     }
 
     useEffect(() => {
@@ -37,7 +38,9 @@ const ProductCard = ({ name, price, rating, image, _id, slug }: any) => {
     return (
         <>
             <div className="w-full max-w-sm bg-gray-200 border border-gray-200 rounded-lg m-5 transition-all hover:shadow-gray-400 shadow-md">
-                <Alert message='product added to cart' duration={5} showAlert={showAlert} setShowAlert={setShowAlert} />
+                <Toaster position="top-center" toastOptions={{
+                    className: "bg-green-300 text-lg text-white font-bold tracking-wide"
+                }} />
 
                 <Link href={`/products/${slug.current}`} passHref>
                     <Image className="p-8 rounded-t-lg mx-auto hover:scale-105 transition-all" src={urlFor(image).size(250, 250).url()} height={250} width={250} alt="product image" />

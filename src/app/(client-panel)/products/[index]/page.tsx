@@ -5,19 +5,21 @@ import { getData, urlFor } from "../../../../../sanity/utils";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import LoadLoading from "../../../../../components/loadings/LoadLoading";
-import Alert from "../../../../../components/common/Alert";
 import { addProduct } from "@/redux/slices/useReducer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Product = ({ props }: any) => {
 
+  const selector: string | string[] = useSelector((state: any) => state.CartProducts);
   const dispatch = useDispatch()
   const slug = usePathname()?.split('/').pop();
   const [product, setProduct] = useState<any>(null);
   const [largeImage, setLargeImage] = useState<string>('');
   // const [quantity, setQuantity] = useState<number>(1)
   const [Error, setError] = useState<boolean | undefined>();
-  const [showAlert, setShowAlert] = useState(false)
+  const notify = () => toast('Product Added To Cart', { duration: 3000 })
+
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -59,7 +61,7 @@ const Product = ({ props }: any) => {
   return (
     <>
       <div className="flex flex-col justify-center items-center space-y-20 w-[90%] mx-auto">
-        
+
         <div className="bg-gray-100 rounded-md w-full mx-auto flex flex-col md:flex-row items-center md:justify-around p-5">
           {/* small images */}
           <div className="flex flex-row md:flex-col justify-center items-center space-y-2 space-x-2 md:space-x-0 w-full md:w-[20%] flex-wrap ">
@@ -109,10 +111,13 @@ const Product = ({ props }: any) => {
             <div className="flex flex-row justify-start items-center space-x-5 flex-wrap space-y-2">
               <button className="bg-gray-900 py-3 px-5 rounded-2xl text-lg font-sans font-semibold text-white capitalize"
                 onClick={() => {
+                  if (selector.includes(`"${_id}"`)) {
+                    return;
+                };
                   dispatch(
                     addProduct([`"${_id}"`])
                   );
-                  setShowAlert(true)
+                  notify();
                 }}
               >
                 add to cart
@@ -158,8 +163,9 @@ const Product = ({ props }: any) => {
           </div>
         </div>
       </div>
-      <Alert duration={5} message="product added to cart" setShowAlert={setShowAlert} showAlert={showAlert} />
-    </>
+      <Toaster position="top-center" toastOptions={{
+        className: "bg-green-300 text-lg text-white font-bold tracking-wide"
+      }} />    </>
   );
 };
 
