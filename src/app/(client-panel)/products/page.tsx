@@ -108,7 +108,7 @@ const Page = () => {
     if (choice == 'mostSaled') {
       setFilteredProducts(mostSaled)
     }
-  })
+  },[choice, allProducts, recommended, topRated, mostSaled])
 
   if (!filteredProducts) {
     return (

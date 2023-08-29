@@ -185,7 +185,7 @@ const Product = ({ props }: any) => {
                     categoryProducts.map((elem: any) => {
                       const { name, price, rating, image, _id, slug } = elem;
                       return (
-                        <ProductCard name={name} price={price} rating={rating} image={image[0].asset} _id={_id} slug={slug} />
+                        <ProductCard name={name} price={price} rating={rating} image={image[0].asset} _id={_id} slug={slug} key={_id}/>
                       )
                     })
                   }
