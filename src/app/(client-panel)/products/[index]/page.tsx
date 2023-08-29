@@ -8,54 +8,67 @@ import LoadLoading from "../../../../../components/loadings/LoadLoading";
 import { addProduct } from "@/redux/slices/useReducer";
 import { useDispatch, useSelector } from "react-redux";
 import toast, { Toaster } from 'react-hot-toast';
+import ProductCard from "../../../../../components/common/ProductCard";
 
 const Product = ({ props }: any) => {
 
   const selector: string | string[] = useSelector((state: any) => state.CartProducts);
   const dispatch = useDispatch()
   const slug = usePathname()?.split('/').pop();
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<any>({});
+  const [categoryProducts, setCategoryProducts] = useState<any>([])
   const [largeImage, setLargeImage] = useState<string>('');
-  // const [quantity, setQuantity] = useState<number>(1)
   const [Error, setError] = useState<boolean | undefined>();
   const notify = () => toast('Product Added To Cart', { duration: 3000 })
 
 
+
   useEffect(() => {
     const fetchProduct = async () => {
-
       try {
-        const productData: any = await getData(
-          `*[_type == 'product' && slug.current == "${slug}"]{...,'category' : category[] -> name}`
+        const productData = await getData(
+          `*[_type == 'product' && slug.current == "${slug}"]{..., 'category': category[0]->name}`
         );
-        if (productData.length > 0) {
-          setProduct(productData[0]);
-          setLargeImage(urlFor(productData[0].image[0]).size(350, 350).url());
-          setError(false)
-        } else {
-          setError(true)
+
+        if (productData.length === 0) {
+          setError(true);
+          return;
         }
+
+        const product = productData[0];
+
+        setProduct(product);
+        setLargeImage(urlFor(product.image[0]).size(350, 350).url());
+
+        const fetchedCategoryProducts = await getData(
+          `*[_type == "product" && category[0]->name == "${product.category}" && name != "${product.name}"]`
+        );
+
+        setCategoryProducts(fetchedCategoryProducts);
+        setError(false);
       } catch (err) {
         setError(true);
+        console.error(err);
       }
     };
 
-
     fetchProduct();
-  }, [slug]);
+  }, [slug, getData, urlFor]);
+
 
   if (Error) {
     return (
       <div >Product not found !!!</div>
     )
   }
-  if (!product) {
+  if (!Object.keys(product).length) {
     return (
       <LoadLoading />
-    ); // Add loading state or error handling
+    );
   }
   const { name, image, category, description, price, _id } = product;
   const smallImg = 150;
+
 
 
   return (
@@ -65,7 +78,7 @@ const Product = ({ props }: any) => {
         <div className="bg-gray-100 rounded-md w-full mx-auto flex flex-col md:flex-row items-center md:justify-around p-5">
           {/* small images */}
           <div className="flex flex-row md:flex-col justify-center items-center space-y-2 space-x-2 md:space-x-0 w-full md:w-[20%] flex-wrap ">
-            {image.map((img: any, i: number) => (
+            {image && image.map((img: any, i: number) => (
               <Image
                 key={i}
                 src={urlFor(img).size(smallImg, smallImg).url()}
@@ -113,7 +126,7 @@ const Product = ({ props }: any) => {
                 onClick={() => {
                   if (selector.includes(`"${_id}"`)) {
                     return;
-                };
+                  };
                   dispatch(
                     addProduct([`"${_id}"`])
                   );
@@ -161,6 +174,24 @@ const Product = ({ props }: any) => {
               </div>
             </div>
           </div>
+          {
+            categoryProducts.length > 0 && (
+              <div className="flex flex-col justify-center items-center my-5 border-t-2 border-gray-500 py-5">
+                <div className="text-2xl sm:text-4xl text-gray-800 tracking-widest font-sans font-extrabold capitalize">
+                  more from this category
+                </div>
+                <div className="flex flex-row items-center justify-center gap-2 w-full flex-wrap">
+                  {
+                    categoryProducts.map((elem: any) => {
+                      const { name, price, rating, image, _id, slug } = elem;
+                      return (
+                        <ProductCard name={name} price={price} rating={rating} image={image[0].asset} _id={_id} slug={slug} />
+                      )
+                    })
+                  }
+                </div>
+              </div>
+            )}
         </div>
       </div>
       <Toaster position="top-center" toastOptions={{
