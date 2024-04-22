@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { getData, urlFor } from "../../../../../sanity/utils";
@@ -7,21 +7,20 @@ import { usePathname } from "next/navigation";
 import LoadLoading from "../../../../../components/loadings/LoadLoading";
 import { addProduct } from "@/redux/slices/useReducer";
 import { useDispatch, useSelector } from "react-redux";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 import ProductCard from "../../../../../components/common/ProductCard";
 
 const Product = ({ props }: any) => {
-
-  const selector: string | string[] = useSelector((state: any) => state.CartProducts);
-  const dispatch = useDispatch()
-  const slug = usePathname()?.split('/').pop();
+  const selector: string | string[] = useSelector(
+    (state: any) => state.CartProducts
+  );
+  const dispatch = useDispatch();
+  const slug = usePathname()?.split("/").pop();
   const [product, setProduct] = useState<any>({});
-  const [categoryProducts, setCategoryProducts] = useState<any>([])
-  const [largeImage, setLargeImage] = useState<string>('');
+  const [categoryProducts, setCategoryProducts] = useState<any>([]);
+  const [largeImage, setLargeImage] = useState<string>("");
   const [Error, setError] = useState<boolean | undefined>();
-  const notify = () => toast('Product Added To Cart', { duration: 3000 })
-
-
+  const notify = () => toast("Product Added To Cart", { duration: 3000 });
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -55,45 +54,40 @@ const Product = ({ props }: any) => {
     fetchProduct();
   }, [slug, getData, urlFor]);
 
-
   if (Error) {
-    return (
-      <div >Product not found !!!</div>
-    )
+    return <div>Product not found !!!</div>;
   }
   if (!Object.keys(product).length) {
-    return (
-      <LoadLoading />
-    );
+    return <LoadLoading />;
   }
   const { name, image, category, description, price, _id } = product;
   const smallImg = 150;
 
-
-
   return (
     <>
       <div className="flex flex-col justify-center items-center space-y-20 w-[90%] mx-auto">
-
         <div className="bg-gray-100 rounded-md w-full mx-auto flex flex-col md:flex-row items-center md:justify-around p-5">
           {/* small images */}
           <div className="flex flex-row md:flex-col justify-center items-center space-y-2 space-x-2 md:space-x-0 w-full md:w-[20%] flex-wrap ">
-            {image && image.map((img: any, i: number) => (
-              <Image
-                key={i}
-                src={urlFor(img).size(smallImg, smallImg).url()}
-                alt={'img'}
-                height={smallImg}
-                width={smallImg}
-                className="bg-gray-200 rounded-lg cursor-pointer"
-                onMouseEnter={() => setLargeImage(urlFor(img).size(350, 350).url())}
-              />
-            ))}
+            {image &&
+              image.map((img: any, i: number) => (
+                <Image
+                  key={i}
+                  src={urlFor(img).size(smallImg, smallImg).url()}
+                  alt={"img"}
+                  height={smallImg}
+                  width={smallImg}
+                  className="bg-gray-200 rounded-lg cursor-pointer"
+                  onMouseEnter={() =>
+                    setLargeImage(urlFor(img).size(350, 350).url())
+                  }
+                />
+              ))}
           </div>
 
           {/* large image */}
           <div className="w-full md:w-[45%] flex flex-row justify-center items-center">
-            <Image src={largeImage} alt={'img'} height={350} width={350} />
+            <Image src={largeImage} alt={"img"} height={350} width={350} />
           </div>
 
           {/* detail section */}
@@ -122,20 +116,21 @@ const Product = ({ props }: any) => {
 
             {/* price and cart */}
             <div className="flex flex-row justify-start items-center space-x-5 flex-wrap space-y-2">
-              <button className="bg-gray-900 py-3 px-5 rounded-2xl text-lg font-sans font-semibold text-white capitalize"
+              <button
+                className="bg-gray-900 py-3 px-5 rounded-2xl text-lg font-sans font-semibold text-white capitalize"
                 onClick={() => {
                   if (selector.includes(`"${_id}"`)) {
                     return;
-                  };
-                  dispatch(
-                    addProduct([`"${_id}"`])
-                  );
+                  }
+                  dispatch(addProduct([`"${_id}"`]));
                   notify();
                 }}
               >
                 add to cart
               </button>
-              <div className="text-3xl text-gray-950 font-extrabold ">${price}</div>
+              <div className="text-3xl text-gray-950 font-extrabold ">
+                ${price}
+              </div>
             </div>
           </div>
         </div>
@@ -174,31 +169,39 @@ const Product = ({ props }: any) => {
               </div>
             </div>
           </div>
-          {
-            categoryProducts.length > 0 && (
-              <div className="flex flex-col justify-center items-center my-5 border-t-2 border-gray-500 py-5">
-                <div className="text-2xl sm:text-4xl text-gray-800 tracking-widest font-sans font-extrabold capitalize">
-                  more from this category
-                </div>
-                <div className="flex flex-row items-center justify-center gap-2 w-full flex-wrap">
-                  {
-                    categoryProducts.map((elem: any) => {
-                      const { name, price, rating, image, _id, slug } = elem;
-                      return (
-                        <ProductCard name={name} price={price} rating={rating} image={image[0].asset} _id={_id} slug={slug} key={_id}/>
-                      )
-                    })
-                  }
-                </div>
+          {categoryProducts.length > 0 && (
+            <div className="flex flex-col justify-center items-center my-5 border-t-2 border-gray-500 py-5">
+              <div className="text-2xl sm:text-4xl text-gray-800 tracking-widest font-sans font-extrabold capitalize">
+                more from this category
               </div>
-            )}
+              <div className="flex flex-row items-center justify-center gap-2 w-full flex-wrap">
+                {categoryProducts.map((elem: any) => {
+                  const { name, price, rating, image, _id, slug } = elem;
+                  return (
+                    <ProductCard
+                      name={name}
+                      price={price}
+                      rating={rating}
+                      image={image[0].asset}
+                      _id={_id}
+                      slug={slug}
+                      key={_id}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
       </div>
-      <Toaster position="top-center" toastOptions={{
-        className: "bg-green-300 text-lg text-white font-bold tracking-wide"
-      }} />    </>
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          className: "bg-green-300 text-lg text-white font-bold tracking-wide",
+        }}
+      />{" "}
+    </>
   );
 };
-
 
 export default Product;
